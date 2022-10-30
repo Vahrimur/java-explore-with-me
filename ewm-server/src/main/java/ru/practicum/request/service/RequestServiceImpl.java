@@ -68,7 +68,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<ParticipationRequestDto> getRequests(Long userId) throws IncorrectObjectException {
+    public List<ParticipationRequestDto> getRequestsByRequesterId(Long userId) throws IncorrectObjectException {
         userService.checkUserExists(userId);
 
         return ParticipationRequestDtoMapper.mapToParticipationRequestDto(

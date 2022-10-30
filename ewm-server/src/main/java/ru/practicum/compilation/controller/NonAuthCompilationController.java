@@ -16,7 +16,6 @@ import java.util.List;
 public class NonAuthCompilationController {
     private final CompilationService compilationService;
 
-    //Получение подборок событий
     @GetMapping
     public List<CompilationDto> findCompilations(@RequestParam(required = false) Boolean pinned,
                                                  @RequestParam(defaultValue = "0") Integer from,
@@ -25,7 +24,6 @@ public class NonAuthCompilationController {
         return compilationService.getCompilations(pinned, from, size);
     }
 
-    //Получение подборки событий по его id
     @GetMapping("/{compId}")
     public CompilationDto findCompilationById(@PathVariable Long compId) throws IncorrectObjectException {
         log.info("GET /compilations/{}", compId);

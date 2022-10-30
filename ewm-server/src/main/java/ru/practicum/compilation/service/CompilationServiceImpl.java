@@ -51,7 +51,7 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
-    public void deleteCompilation(Long compId) throws IncorrectObjectException {
+    public void deleteCompilationById(Long compId) throws IncorrectObjectException {
         checkCompilationExists(compId);
 
         compilationRepository.deleteById(compId);
@@ -75,7 +75,7 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
-    public void pinCompilation(Long compId) throws IncorrectObjectException, WrongConditionException {
+    public void pinCompilationById(Long compId) throws IncorrectObjectException, WrongConditionException {
         checkCompilationExists(compId);
         checkCompilationPinned(compId);
 
@@ -85,7 +85,7 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
-    public void unpinCompilation(Long compId) throws IncorrectObjectException, WrongConditionException {
+    public void unpinCompilationById(Long compId) throws IncorrectObjectException, WrongConditionException {
         checkCompilationExists(compId);
         checkCompilationNotPinned(compId);
 

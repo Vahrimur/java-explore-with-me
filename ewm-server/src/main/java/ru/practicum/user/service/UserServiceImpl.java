@@ -1,8 +1,6 @@
 package ru.practicum.user.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.practicum.exception.IncorrectFieldException;
 import ru.practicum.exception.IncorrectObjectException;
@@ -34,20 +32,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUsers(List<Long> ids, Integer from, Integer size) {
-        checkPageableParams(from, size);
+        checkCorrectParams(from, size);
 
-        Pageable sorted = PageRequest.of((from / size), size);
         List<User> users;
         if (ids == null) {
             users = userRepository.findAllByParams(from, size);
         } else {
-            users = userRepository.findAllByIds(ids, sorted);
+            users = userRepository.findAllByIdsAndParams(ids, from, size);
         }
         return UserDtoMapper.mapToUserDto(users);
     }
 
     @Override
-    public void deleteUser(Long userId) throws IncorrectObjectException {
+    public void deleteUserById(Long userId) throws IncorrectObjectException {
         checkUserExists(userId);
 
         userRepository.deleteById(userId);
@@ -72,7 +69,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private void checkPageableParams(Integer from, Integer size) {
+    private void checkCorrectParams(Integer from, Integer size) {
         if (from < 0) {
             throw new IllegalArgumentException("From parameter cannot be less zero");
         }

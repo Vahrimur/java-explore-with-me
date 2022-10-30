@@ -18,7 +18,6 @@ import java.util.List;
 public class AdminEventController {
     private final EventService eventService;
 
-    //Редактирование события
     @PutMapping(value = "/{eventId}")
     public EventFullDto updateEvent(@PathVariable Long eventId,
                                     @RequestBody AdminUpdateEventRequest adminUpdateEventRequest)
@@ -27,7 +26,6 @@ public class AdminEventController {
         return eventService.updateEventByAdmin(eventId, adminUpdateEventRequest);
     }
 
-    //Публикация события
     @PatchMapping(value = "/{eventId}/publish")
     public EventFullDto publishEvent(@PathVariable Long eventId)
             throws IncorrectObjectException, WrongConditionException {
@@ -35,7 +33,6 @@ public class AdminEventController {
         return eventService.publishEventByAdmin(eventId);
     }
 
-    //Отклонение события
     @PatchMapping(value = "/{eventId}/reject")
     public EventFullDto rejectEvent(@PathVariable Long eventId)
             throws WrongConditionException, IncorrectObjectException {
@@ -43,7 +40,6 @@ public class AdminEventController {
         return eventService.rejectEventByAdmin(eventId);
     }
 
-    //Поиск событий
     @GetMapping
     public List<EventFullDto> findEvents(@RequestParam(required = false) List<Long> users,
                                          @RequestParam(required = false) List<String> states,

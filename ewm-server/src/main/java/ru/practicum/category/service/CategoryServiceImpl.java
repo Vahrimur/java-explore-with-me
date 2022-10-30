@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> getCategories(Integer from, Integer size) {
-        checkPageableParams(from, size);
+        checkCorrectParams(from, size);
 
         List<Category> categories = categoryRepository.findAllByParams(from, size);
         return CategoryDtoMapper.mapToCategoryDto(categories);
@@ -53,7 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(Long catId) throws IncorrectObjectException {
+    public void deleteCategoryById(Long catId) throws IncorrectObjectException {
         checkCategoryExist(catId);
 
         categoryRepository.deleteById(catId);
@@ -86,7 +86,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
-    private void checkPageableParams(Integer from, Integer size) {
+    private void checkCorrectParams(Integer from, Integer size) {
         if (from < 0) {
             throw new IllegalArgumentException("From parameter cannot be less zero");
         }

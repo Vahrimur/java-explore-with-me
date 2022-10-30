@@ -19,7 +19,6 @@ import java.util.List;
 public class AdminUserController {
     private final UserService userService;
 
-    //Добавление нового пользователя
     @PostMapping
     public UserDto addUser(@RequestBody NewUserRequest newUserRequest) throws IncorrectFieldException {
         UserDto userDto = userService.createUser(newUserRequest);
@@ -27,19 +26,17 @@ public class AdminUserController {
         return userDto;
     }
 
-    //Получение информации о пользователях
     @GetMapping
     public List<UserDto> findUsers(@RequestParam(required = false) List<Long> ids,
-                                  @RequestParam(defaultValue = "0") Integer from,
-                                  @RequestParam(defaultValue = "10") Integer size) {
+                                   @RequestParam(defaultValue = "0") Integer from,
+                                   @RequestParam(defaultValue = "10") Integer size) {
         log.info("GET /users?ids={}&from={}&size={}", ids, from, size);
         return userService.getUsers(ids, from, size);
     }
 
-    //Удаление пользователя
     @DeleteMapping(value = "/{userId}")
-    public void removeUser(@PathVariable @NotNull Long userId) throws IncorrectObjectException {
+    public void removeUserById(@PathVariable @NotNull Long userId) throws IncorrectObjectException {
         log.info("DELETE /users/{}", userId);
-        userService.deleteUser(userId);
+        userService.deleteUserById(userId);
     }
 }

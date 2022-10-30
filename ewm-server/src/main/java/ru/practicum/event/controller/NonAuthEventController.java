@@ -23,7 +23,6 @@ public class NonAuthEventController {
     private final EventService eventService;
     private final StatClient statClient;
 
-    //Получение событий с возможностью фильтрации
     @GetMapping
     public List<EventShortDto> findEvents(
             @RequestParam(required = false) String text,
@@ -48,10 +47,9 @@ public class NonAuthEventController {
         );
     }
 
-    //Получение подробной информации об опубликованном событии по его идентификатору
     @GetMapping(value = "/{eventId}")
-    public EventFullDto findEvent(@PathVariable(value = "eventId") Long eventId,
-                                  HttpServletRequest httpServletRequest) throws IncorrectObjectException, IOException {
+    public EventFullDto findEventById(@PathVariable(value = "eventId") Long eventId,
+                                      HttpServletRequest httpServletRequest) throws IncorrectObjectException, IOException {
         statClient.sendStats(httpServletRequest);
         EventFullDto eventFullDto = eventService.getEventById(eventId);
         eventService.addViewForEvent(eventFullDto);

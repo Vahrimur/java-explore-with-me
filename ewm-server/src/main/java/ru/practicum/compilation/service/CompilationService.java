@@ -12,7 +12,7 @@ public interface CompilationService {
     CompilationDto createCompilation(NewCompilationDto newCompilationDto)
             throws IncorrectObjectException, IncorrectFieldException;
 
-    void deleteCompilation(Long compId) throws IncorrectObjectException;
+    void deleteCompilationById(Long compId) throws IncorrectObjectException;
 
     void checkCompilationExists(Long compId) throws IncorrectObjectException;
 
@@ -24,7 +24,7 @@ public interface CompilationService {
 
     void deleteEventFromCompilation(Long compId, Long eventId) throws IncorrectObjectException;
 
-    void pinCompilation(Long compId) throws IncorrectObjectException, WrongConditionException;
+    void pinCompilationById(Long compId) throws IncorrectObjectException, WrongConditionException;
 
-    void unpinCompilation(Long compId) throws IncorrectObjectException, WrongConditionException;
+    void unpinCompilationById(Long compId) throws IncorrectObjectException, WrongConditionException;
 }

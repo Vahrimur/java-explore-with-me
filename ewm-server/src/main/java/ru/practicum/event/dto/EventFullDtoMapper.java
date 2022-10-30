@@ -15,7 +15,7 @@ public class EventFullDtoMapper {
                 event.getAnnotation(),
                 new CategoryDto(event.getCategory().getId(), event.getCategory().getName()),
                 event.getConfirmedRequests(),
-                event.getCreated(),
+                event.getCreatedOn(),
                 event.getDescription(),
                 event.getEventDate(),
                 new UserShortDto(event.getInitiator().getId(), event.getInitiator().getName()),

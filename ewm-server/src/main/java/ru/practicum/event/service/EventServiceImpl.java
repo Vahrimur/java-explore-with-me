@@ -98,6 +98,7 @@ public class EventServiceImpl implements EventService {
     public List<EventShortDto> getEventsByInitiator(Long userId, Integer from, Integer size)
             throws IncorrectObjectException {
         userService.checkUserExists(userId);
+        checkCorrectParams(from, size);
 
         return EventShortDtoMapper.mapToEventShortDto(eventRepository.findAllByParams(userId, from, size));
     }
@@ -122,6 +123,7 @@ public class EventServiceImpl implements EventService {
                                          EventSort sort,
                                          Integer from,
                                          Integer size) {
+        checkCorrectParams(from, size);
         LocalDateTime startTime;
         LocalDateTime endTime;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -248,6 +250,7 @@ public class EventServiceImpl implements EventService {
                                                String rangeEnd,
                                                Integer from,
                                                Integer size) {
+        checkCorrectParams(from, size);
         LocalDateTime startTime;
         LocalDateTime endTime;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -377,5 +380,14 @@ public class EventServiceImpl implements EventService {
         Event event = eventRepository.getById(eventFullDto.getId());
         event.setViews(event.getViews() + 1);
         eventRepository.save(event);
+    }
+
+    private void checkCorrectParams(Integer from, Integer size) {
+        if (from < 0) {
+            throw new IllegalArgumentException("From parameter cannot be less zero");
+        }
+        if (size <= 0) {
+            throw new IllegalArgumentException("Size parameter cannot be less or equal zero");
+        }
     }
 }

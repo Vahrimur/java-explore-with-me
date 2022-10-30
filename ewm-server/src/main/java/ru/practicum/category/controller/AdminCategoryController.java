@@ -17,7 +17,6 @@ import ru.practicum.exception.IncorrectObjectException;
 public class AdminCategoryController {
     private final CategoryService categoryService;
 
-    //Добавление новой категории
     @PostMapping
     public CategoryDto addCategory(@RequestBody NewCategoryDto newCategoryDto) throws IncorrectFieldException {
         CategoryDto categoryDto = categoryService.createCategory(newCategoryDto);
@@ -25,7 +24,6 @@ public class AdminCategoryController {
         return categoryDto;
     }
 
-    //Изменение категории
     @PatchMapping
     public CategoryDto updateCategory(@RequestBody CategoryDto categoryDto)
             throws IncorrectObjectException, IncorrectFieldException {
@@ -34,10 +32,9 @@ public class AdminCategoryController {
         return categoryDto;
     }
 
-    //Удаление категории
     @DeleteMapping(value = "/{catId}")
-    public void removeCategory(@PathVariable @NotNull Long catId) throws IncorrectObjectException {
+    public void removeCategoryById(@PathVariable @NotNull Long catId) throws IncorrectObjectException {
         log.info("DELETE /admin/categories/" + catId);
-        categoryService.deleteCategory(catId);
+        categoryService.deleteCategoryById(catId);
     }
 }

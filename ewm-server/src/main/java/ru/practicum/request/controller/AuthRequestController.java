@@ -18,7 +18,6 @@ import java.util.List;
 public class AuthRequestController {
     private final RequestService requestService;
 
-    //Добавление запроса от текущего пользователя на участие в событии
     @PostMapping(value = "/{userId}/requests")
     public ParticipationRequestDto addRequest(@PathVariable(value = "userId") Long userId,
                                               @RequestParam("eventId") Long eventId)
@@ -27,7 +26,6 @@ public class AuthRequestController {
         return requestService.createRequest(userId, eventId);
     }
 
-    //Отмена своего запроса на участие в событии
     @PatchMapping(value = "/{userId}/requests/{requestId}/cancel")
     public ParticipationRequestDto cancelRequest(@PathVariable(value = "userId") Long userId,
                                                  @PathVariable(value = "requestId") Long requestId)
@@ -36,11 +34,10 @@ public class AuthRequestController {
         return requestService.cancelRequest(userId, requestId);
     }
 
-    //Получение информации о заявках текущего пользователя на участие в чужих событиях
     @GetMapping(value = "/{userId}/requests")
-    public List<ParticipationRequestDto> getRequests(@PathVariable(value = "userId") Long userId)
+    public List<ParticipationRequestDto> getRequestsByRequesterId(@PathVariable(value = "userId") Long userId)
             throws IncorrectObjectException {
         log.info("GET /users/{}/requests", userId);
-        return requestService.getRequests(userId);
+        return requestService.getRequestsByRequesterId(userId);
     }
 }

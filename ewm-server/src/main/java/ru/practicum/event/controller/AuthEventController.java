@@ -24,7 +24,6 @@ public class AuthEventController {
     private final EventService eventService;
     private final RequestService requestService;
 
-    //Добавление нового события
     @PostMapping(value = "/{userId}/events")
     public EventFullDto addEvent(@PathVariable(value = "userId") Long userId,
                                  @RequestBody NewEventDto newEventDto)
@@ -33,7 +32,6 @@ public class AuthEventController {
         return eventService.createEvent(userId, newEventDto);
     }
 
-    //Изменение события, добавленного текущим пользователем
     @PatchMapping(value = "/{userId}/events")
     public EventFullDto updateEvent(@PathVariable(value = "userId") Long userId,
                                     @RequestBody UpdateEventRequest updateEventRequest)
@@ -42,7 +40,6 @@ public class AuthEventController {
         return eventService.updateEvent(userId, updateEventRequest);
     }
 
-    //Отмена события, добавленного текущим пользователем
     @PatchMapping(value = "/{userId}/events/{eventId}")
     public EventFullDto cancelEvent(@PathVariable(value = "userId") Long userId,
                                     @PathVariable(value = "eventId") Long eventId)
@@ -51,7 +48,6 @@ public class AuthEventController {
         return eventService.cancelEvent(userId, eventId);
     }
 
-    // Получение событий, добавленных текущим пользователем
     @GetMapping(value = "/{userId}/events")
     public List<EventShortDto> findEventsByInitiator(@PathVariable(value = "userId") Long userId,
                                                      @RequestParam(required = false) Integer from,
@@ -61,7 +57,6 @@ public class AuthEventController {
         return eventService.getEventsByInitiator(userId, from, size);
     }
 
-    // Получение полной информации о событии, добавленном текущим пользователем
     @GetMapping(value = "/{userId}/events/{eventId}")
     public EventFullDto findEventByInitiator(@PathVariable(value = "userId") Long userId,
                                              @PathVariable(value = "eventId") Long eventId)
@@ -70,7 +65,6 @@ public class AuthEventController {
         return eventService.getEventByInitiator(userId, eventId);
     }
 
-    //Подтверждение чужой заявки на участие в событии текущего пользователя
     @PatchMapping("/{userId}/events/{eventId}/requests/{reqId}/confirm")
     public ParticipationRequestDto confirmRequestByInitiator(@PathVariable Long userId,
                                                              @PathVariable Long eventId,
@@ -80,7 +74,6 @@ public class AuthEventController {
         return requestService.confirmRequestByInitiator(userId, eventId, reqId);
     }
 
-    //Отклонение чужой заявки на участие в событии текущего пользователя
     @PatchMapping("/{userId}/events/{eventId}/requests/{reqId}/reject")
     public ParticipationRequestDto rejectRequestByInitiator(@PathVariable Long userId,
                                                             @PathVariable Long eventId,
@@ -90,7 +83,6 @@ public class AuthEventController {
         return requestService.rejectRequestByInitiator(userId, eventId, reqId);
     }
 
-    //Получение информации о запросах на участие в событии текущего пользователя
     @GetMapping("/{userId}/events/{eventId}/requests")
     public List<ParticipationRequestDto> getRequestByInitiator(@PathVariable Long userId,
                                                                @PathVariable Long eventId)

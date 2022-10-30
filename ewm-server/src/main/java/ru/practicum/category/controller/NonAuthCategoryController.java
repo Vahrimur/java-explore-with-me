@@ -17,7 +17,6 @@ import java.util.List;
 public class NonAuthCategoryController {
     private final CategoryService categoryService;
 
-    //Получение категорий
     @GetMapping
     public List<CategoryDto> findCategories(@RequestParam(defaultValue = "0") Integer from,
                                             @RequestParam(defaultValue = "10") Integer size) {
@@ -25,9 +24,8 @@ public class NonAuthCategoryController {
         return categoryService.getCategories(from, size);
     }
 
-    //Получение информации о категории по ее идентификатору
     @GetMapping(value = "/{catId}")
-    public CategoryDto findCategory(@PathVariable @NotNull Long catId) throws IncorrectObjectException {
+    public CategoryDto findCategoryById(@PathVariable @NotNull Long catId) throws IncorrectObjectException {
         log.info("GET /categories/" + catId);
         return categoryService.getCategoryById(catId);
     }

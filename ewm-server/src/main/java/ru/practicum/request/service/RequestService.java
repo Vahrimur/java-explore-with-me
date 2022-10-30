@@ -14,7 +14,7 @@ public interface RequestService {
     ParticipationRequestDto cancelRequest(Long userId, Long requestId)
             throws IncorrectObjectException, IncorrectFieldException, WrongConditionException;
 
-    List<ParticipationRequestDto> getRequests(Long userId) throws IncorrectObjectException;
+    List<ParticipationRequestDto> getRequestsByRequesterId(Long userId) throws IncorrectObjectException;
 
     ParticipationRequestDto confirmRequestByInitiator(Long initiatorId, Long eventId, Long reqId)
             throws IncorrectObjectException, IncorrectFieldException, WrongConditionException;

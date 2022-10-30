@@ -18,7 +18,7 @@ public class NewEventDtoMapper {
         event.setParticipantLimit(newEventDto.getParticipantLimit());
         event.setRequestModeration(newEventDto.getRequestModeration());
         event.setConfirmedRequests(0);
-        event.setCreated(LocalDateTime.now());
+        event.setCreatedOn(LocalDateTime.now());
         event.setState(EventState.PENDING);
         event.setViews(0);
         event.setPublishedOn(LocalDateTime.now());

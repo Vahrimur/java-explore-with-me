@@ -17,7 +17,6 @@ import ru.practicum.exception.WrongConditionException;
 public class AdminCompilationController {
     private final CompilationService compilationService;
 
-    //Добавление новой подборки
     @PostMapping
     public CompilationDto addCompilation(@RequestBody NewCompilationDto newCompilationDto)
             throws IncorrectObjectException, IncorrectFieldException {
@@ -25,14 +24,12 @@ public class AdminCompilationController {
         return compilationService.createCompilation(newCompilationDto);
     }
 
-    //Удаление подборки
     @DeleteMapping("/{compId}")
-    public void deleteCompilation(@PathVariable Long compId) throws IncorrectObjectException {
+    public void deleteCompilationById(@PathVariable Long compId) throws IncorrectObjectException {
         log.info("DELETE /admin/compilations/{}", compId);
-        compilationService.deleteCompilation(compId);
+        compilationService.deleteCompilationById(compId);
     }
 
-    //Добавление события в подборку
     @PatchMapping("/{compId}/events/{eventId}")
     public void addEventToCompilation(@PathVariable Long compId,
                                       @PathVariable Long eventId) throws IncorrectObjectException {
@@ -40,7 +37,6 @@ public class AdminCompilationController {
         compilationService.addEventToCompilation(compId, eventId);
     }
 
-    //Удаление события из подборки
     @DeleteMapping("/{compId}/events/{eventId}")
     public void deleteEventFromCompilation(@PathVariable Long compId,
                                            @PathVariable Long eventId) throws IncorrectObjectException {
@@ -48,17 +44,16 @@ public class AdminCompilationController {
         compilationService.deleteEventFromCompilation(compId, eventId);
     }
 
-    //Закрепление подборки на главной странице
     @PatchMapping("/{compId}/pin")
-    public void pinCompilation(@PathVariable Long compId) throws WrongConditionException, IncorrectObjectException {
+    public void pinCompilationById(@PathVariable Long compId) throws WrongConditionException, IncorrectObjectException {
         log.info("PATCH /admin/compilations/{}/pin", compId);
-        compilationService.pinCompilation(compId);
+        compilationService.pinCompilationById(compId);
     }
 
-    //Открепление подборки на главной странице
     @DeleteMapping("/{compId}/pin")
-    public void unpinCompilation(@PathVariable Long compId) throws WrongConditionException, IncorrectObjectException {
+    public void unpinCompilationById(@PathVariable Long compId)
+            throws WrongConditionException, IncorrectObjectException {
         log.info("DELETE /admin/compilations/{}/pin", compId);
-        compilationService.unpinCompilation(compId);
+        compilationService.unpinCompilationById(compId);
     }
 }

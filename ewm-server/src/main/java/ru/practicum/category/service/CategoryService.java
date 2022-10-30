@@ -12,7 +12,7 @@ public interface CategoryService {
 
     CategoryDto updateCategory(CategoryDto categoryDto) throws IncorrectObjectException, IncorrectFieldException;
 
-    void deleteCategory(Long categoryId) throws IncorrectObjectException;
+    void deleteCategoryById(Long categoryId) throws IncorrectObjectException;
 
     void checkCategoryExist(Long categoryId) throws IncorrectObjectException;
 
