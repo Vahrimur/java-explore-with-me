@@ -50,8 +50,8 @@ public class AuthEventController {
 
     @GetMapping(value = "/{userId}/events")
     public List<EventShortDto> findEventsByInitiator(@PathVariable(value = "userId") Long userId,
-                                                     @RequestParam(required = false) Integer from,
-                                                     @RequestParam(required = false) Integer size)
+                                                     @RequestParam(defaultValue = "0") Integer from,
+                                                     @RequestParam(defaultValue = "10") Integer size)
             throws IncorrectObjectException {
         log.info("GET /users/{}/events?from={}&size={}", userId, from, size);
         return eventService.getEventsByInitiator(userId, from, size);

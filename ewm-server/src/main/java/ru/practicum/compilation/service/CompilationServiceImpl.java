@@ -118,7 +118,7 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     private void checkNewCompilationTitle(NewCompilationDto newCompilationDto) throws IncorrectFieldException {
-        if (newCompilationDto.getTitle().isBlank()) {
+        if (newCompilationDto.getTitle() == null || newCompilationDto.getTitle().isBlank()) {
             throw new IncorrectFieldException("Title field cannot be blank");
         }
     }

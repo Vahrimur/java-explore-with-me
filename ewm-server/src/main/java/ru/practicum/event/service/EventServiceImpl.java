@@ -39,6 +39,7 @@ public class EventServiceImpl implements EventService {
     public EventFullDto createEvent(Long userId, NewEventDto newEventDto)
             throws IncorrectFieldException, IncorrectObjectException {
         isEventDateAfterTwoHours(newEventDto.getEventDate());
+        checkEventAnnotation(newEventDto.getAnnotation());
         userService.checkUserExists(userId);
         Long catId = newEventDto.getCategory();
         categoryService.checkCategoryExist(catId);
@@ -50,6 +51,12 @@ public class EventServiceImpl implements EventService {
         event.setCategory(category);
         event.setState(EventState.PENDING);
         return EventFullDtoMapper.mapToEventFullDto(eventRepository.save(event));
+    }
+
+    private void checkEventAnnotation(String annotation) throws IncorrectFieldException {
+        if (annotation == null || annotation.isBlank()) {
+            throw new IncorrectFieldException("Annotation field cannot be blank");
+        }
     }
 
     @Override
