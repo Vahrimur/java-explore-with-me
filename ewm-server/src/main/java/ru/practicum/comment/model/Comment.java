@@ -24,8 +24,4 @@ public class Comment {
     private Event event;
     private String text;
     private LocalDateTime createdOn;
-
-    public Comment(String text) {
-        this.text = text;
-    }
 }

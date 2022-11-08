@@ -25,7 +25,7 @@ public class AdminCommentController {
     }
 
     @DeleteMapping(value = "/{commentId}")
-    public void removeCommentById(@PathVariable @NotNull Long commentId) throws IncorrectObjectException {
+    public void removeCommentById(@PathVariable Long commentId) throws IncorrectObjectException {
         log.info("DELETE /admin/comments/" + commentId);
         commentService.deleteCommentById(commentId);
     }

@@ -60,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     private void checkNewCategoryData(NewCategoryDto newCategoryDto) throws IncorrectFieldException {
-        if (newCategoryDto.getName().isBlank()) {
+        if (newCategoryDto.getName() == null || newCategoryDto.getName().isBlank()) {
             throw new IncorrectFieldException("Name field cannot be blank");
         }
     }

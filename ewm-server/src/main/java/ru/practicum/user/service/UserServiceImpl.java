@@ -51,10 +51,10 @@ public class UserServiceImpl implements UserService {
     }
 
     private void checkNewUserRequestData(NewUserRequest newUserRequest) throws IncorrectFieldException {
-        if (newUserRequest.getName().isBlank()) {
+        if (newUserRequest.getName() == null || newUserRequest.getName().isBlank()) {
             throw new IncorrectFieldException("Name field cannot be blank");
         }
-        if (newUserRequest.getEmail().isBlank()) {
+        if (newUserRequest.getEmail() == null || newUserRequest.getEmail().isBlank()) {
             throw new IncorrectFieldException("Email field cannot be blank");
         }
     }

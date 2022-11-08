@@ -78,7 +78,7 @@ public class CommentServiceImpl implements CommentService {
         LocalDateTime endTime;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         if (rangeStart == null) {
-            startTime = LocalDateTime.now().minusYears(100);
+            startTime = LocalDateTime.now().minusYears(50);
         } else {
             startTime = LocalDateTime.parse(rangeStart, formatter);
         }
